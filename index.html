@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LKPD BK - Norma-Norma dalam Masyarakat</title>
+<style>
+  :root{
+    --primary:#2563eb;
+    --secondary:#0f766e;
+    --accent:#f59e0b;
+    --bg:#f4f7fb;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --success:#16a34a;
+    --danger:#dc2626;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+  }
+  .hero{
+    background:linear-gradient(135deg,#1d4ed8,#0f766e);
+    color:white;
+    padding:32px 18px 42px;
+  }
+  .wrap{max-width:980px;margin:auto}
+  .hero-inner{text-align:center}
+  .badge{
+    display:inline-block;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.25);
+    padding:6px 12px;border-radius:999px;font-size:.85rem
+  }
+  h1{font-size:clamp(1.8rem,5vw,3rem);line-height:1.15;margin:14px 0 8px}
+  .subtitle{margin:0 auto;max-width:700px;opacity:.92}
+  .topbar{
+    margin-top:24px;display:grid;grid-template-columns:1fr 1fr;gap:12px
+  }
+  .timer,.progressbox{
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+    border-radius:16px;padding:14px;text-align:left
+  }
+  .timer strong{font-size:1.8rem;display:block}
+  .progress-track{
+    height:10px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden;margin-top:8px
+  }
+  .progress-fill{height:100%;width:0;background:#fff;transition:.3s}
+  main{padding:22px 14px 50px}
+  .card{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:18px;padding:22px;margin:16px 0;
+    box-shadow:0 6px 20px rgba(15,23,42,.05)
+  }
+  .card h2{margin-top:0;color:#0f172a}
+  .section-label{
+    color:var(--primary);font-size:.82rem;font-weight:800;
+    text-transform:uppercase;letter-spacing:.08em
+  }
+  .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .info{
+    border:1px solid var(--border);border-radius:12px;padding:12px;background:#f8fafc
+  }
+  label{font-weight:700;font-size:.9rem}
+  input[type=text]{
+    width:100%;padding:11px;border:1px solid var(--border);
+    border-radius:10px;margin-top:5px;font:inherit
+  }
+  .objective li{margin:7px 0}
+  .instruction{
+    background:#eff6ff;border-left:5px solid var(--primary);
+    padding:14px;border-radius:10px
+  }
+  .task{
+    border:1px solid var(--border);border-radius:14px;padding:16px;margin:14px 0;
+    background:#fcfdff
+  }
+  .task h3{margin-top:0}
+  .time{
+    display:inline-block;font-size:.8rem;background:#fef3c7;
+    color:#92400e;padding:4px 8px;border-radius:999px;font-weight:700
+  }
+  ol.questions{padding-left:24px}
+  ol.questions li{padding:5px 0}
+  .case{
+    background:#f8fafc;border:1px dashed #94a3b8;border-radius:12px;
+    padding:16px;margin:12px 0
+  }
+  .commitment{
+    background:#ecfdf5;border:1px solid #bbf7d0;border-radius:14px;padding:16px
+  }
+  .check{
+    display:flex;align-items:flex-start;gap:10px;margin:10px 0;
+    cursor:pointer
+  }
+  .check input{margin-top:5px;transform:scale(1.15)}
+  .quote{
+    text-align:center;font-weight:700;font-size:1.05rem;
+    padding:18px;background:#f8fafc;border-radius:14px
+  }
+  .actions{
+    display:flex;gap:10px;flex-wrap:wrap;margin-top:20px
+  }
+  button{
+    border:0;border-radius:11px;padding:11px 16px;
+    font:inherit;font-weight:700;cursor:pointer
+  }
+  .primary{background:var(--primary);color:white}
+  .secondary{background:#e2e8f0;color:#0f172a}
+  .success{background:var(--success);color:white}
+  .danger{background:#fee2e2;color:#991b1b}
+  footer{text-align:center;color:var(--muted);font-size:.9rem;padding:10px 20px 30px}
+  .note{font-size:.9rem;color:var(--muted)}
+  @media(max-width:700px){
+    .topbar,.info-grid{grid-template-columns:1fr}
+    .card{padding:17px}
+  }
+  @media print{
+    .hero{background:#fff;color:#000;padding:10px}
+    .topbar,.actions,footer{display:none}
+    .card{box-shadow:none;break-inside:avoid}
+    body{background:#fff}
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <span class="badge">Bimbingan dan Konseling • 1 JP / 45 Menit</span>
+    <h1>Norma-Norma dalam Masyarakat</h1>
+    <p class="subtitle">LKPD interaktif untuk membantu kamu memahami, menganalisis, dan merefleksikan pentingnya norma dalam kehidupan sehari-hari.</p>
+
+    <div class="topbar">
+      <div class="timer">
+        <span>⏱️ Waktu Belajar</span>
+        <strong id="timer">45:00</strong>
+        <button class="secondary" id="timerBtn" onclick="toggleTimer()">▶ Mulai</button>
+        <button class="secondary" onclick="resetTimer()">↺ Reset</button>
+      </div>
+      <div class="progressbox">
+        <span>📈 Progres LKPD</span>
+        <strong id="progressText">0% selesai</strong>
+        <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        <p class="note" style="color:#e2e8f0">Centang kegiatan yang sudah kamu selesaikan.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="card">
+    <div class="section-label">Identitas</div>
+    <h2>👤 Data Peserta Didik</h2>
+    <div class="info-grid">
+      <div class="info">
+        <label for="nama">Nama</label>
+        <input id="nama" type="text" placeholder="Tulis nama kamu">
+      </div>
+      <div class="info">
+        <label for="kelas">Kelas</label>
+        <input id="kelas" type="text" placeholder="Contoh: X-1">
+      </div>
+      <div class="info">
+        <label for="tanggal">Tanggal</label>
+        <input id="tanggal" type="text" placeholder="Contoh: 1 Oktober 2026">
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="section-label">Tujuan</div>
+    <h2>🎯 Tujuan Pembelajaran</h2>
+    <ul class="objective">
+      <li>Menjelaskan pengertian norma.</li>
+      <li>Mengidentifikasi macam-macam norma dalam masyarakat.</li>
+      <li>Menjelaskan fungsi norma dalam kehidupan sehari-hari.</li>
+      <li>Menganalisis perilaku yang sesuai dan tidak sesuai dengan norma.</li>
+      <li>Menumbuhkan kesadaran untuk menaati norma.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <div class="section-label">Petunjuk</div>
+    <h2>📌 Cara Mengerjakan</h2>
+    <div class="instruction">
+      <ol>
+        <li>Siapkan <strong>buku tulis dan alat tulis</strong>.</li>
+        <li>Baca setiap bagian LKPD di website ini.</li>
+        <li><strong>Semua jawaban ditulis di buku tulis</strong>, bukan di website.</li>
+        <li>Gunakan bahasa sendiri dan contoh yang dekat dengan kehidupanmu.</li>
+        <li>Kerjakan secara mandiri dan jujur.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="section-label">Kegiatan 1 • 10 Menit</div>
+    <h2>🧠 Memahami Norma</h2>
+    <p>Jawablah pertanyaan berikut di buku tulismu.</p>
+    <div class="task">
+      <ol class="questions">
+        <li>Apa yang dimaksud dengan norma?</li>
+        <li>Mengapa manusia membutuhkan norma dalam kehidupan bermasyarakat?</li>
+        <li>Apa yang mungkin terjadi jika dalam masyarakat tidak ada norma?</li>
+      </ol>
+      <p><strong>💡 Petunjuk:</strong> Bayangkan sebuah sekolah yang tidak memiliki aturan sama sekali. Apa yang akan terjadi?</p>
+    </div>
+    <label class="check"><input type="checkbox" class="progress-check"> Saya sudah mengerjakan Kegiatan 1 di buku tulis.</label>
+  </section>
+
+  <section class="card">
+    <div class="section-label">Kegiatan 2 • 10 Menit</div>
+    <h2>📚 Mengenal Macam-Macam Norma</h2>
+    <p>Salin tabel berikut ke buku tulis, kemudian lengkapi.</p>
+
+    <div class="task">
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;min-width:600px">
+          <thead>
+            <tr>
+              <th style="border:1px solid #cbd5e1;padding:10px;text-align:left">Jenis Norma</th>
+              <th style="border:1px solid #cbd5e1;padding:10px;text-align:left">Pengertian</th>
+              <th style="border:1px solid #cbd5e1;padding:10px;text-align:left">Contoh</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="border:1px solid #cbd5e1;padding:10px">Norma Agama</td><td style="border:1px solid #cbd5e1;padding:10px">....................</td><td style="border:1px solid #cbd5e1;padding:10px">....................</td></tr>
+            <tr><td style="border:1px solid #cbd5e1;padding:10px">Norma Kesusilaan</td><td style="border:1px solid #cbd5e1;padding:10px">....................</td><td style="border:1px solid #cbd5e1;padding:10px">....................</td></tr>
+            <tr><td style="border:1px solid #cbd5e1;padding:10px">Norma Kesopanan</td><td style="border:1px solid #cbd5e1;padding:10px">....................</td><td style="border:1px solid #cbd5e1;padding:10px">....................</td></tr>
+            <tr><td style="border:1px solid #cbd5e1;padding:10px">Norma Hukum</td><td style="border:1px solid #cbd5e1;padding:10px">....................</td><td style="border:1px solid #cbd5e1;padding:10px">....................</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <p><strong>✏️ Tantangan:</strong> Tuliskan satu contoh perilaku siswa yang menunjukkan kepatuhan terhadap masing-masing norma.</p>
+    <label class="check"><input type="checkbox" class="progress-check"> Saya sudah mengerjakan Kegiatan 2 di buku tulis.</label>
+  </section>
+
+  <section class="card">
+    <div class="section-label">Kegiatan 3 • 15 Menit</div>
+    <h2>🔍 Analisis Kasus</h2>
+
+    <div class="case">
+      <strong>Kasus:</strong><br>
+      Raka melihat temannya membuang sampah sembarangan di halaman sekolah. Ketika diingatkan, temannya berkata,
+      <em>“Tidak apa-apa, toh nanti ada petugas kebersihan yang membersihkannya.”</em>
+    </div>
+
+    <p>Jawablah pertanyaan berikut di buku tulis:</p>
+    <ol class="questions">
+      <li>Apakah perilaku tersebut sesuai dengan norma? Jelaskan alasanmu.</li>
+      <li>Norma apa yang berkaitan dengan kasus tersebut?</li>
+      <li>Apa akibat jika kebiasaan membuang sampah sembarangan terus dilakukan oleh banyak orang?</li>
+      <li>Jika kamu menjadi Raka, apa yang akan kamu lakukan?</li>
+      <li>Tuliskan satu contoh perilaku lain di sekolah yang menurutmu melanggar norma.</li>
+    </ol>
+
+    <label class="check"><input type="checkbox" class="progress-check"> Saya sudah menganalisis kasus dan menulis jawabannya.</label>
+  </section>
+
+  <section class="card">
+    <div class="section-label">Kegiatan 4 • 5 Menit</div>
+    <h2>💭 Refleksi Diri</h2>
+    <p>Jawablah dengan jujur di buku tulis.</p>
+
+    <div class="task">
+      <ol class="questions">
+        <li>Norma apa yang menurut saya paling penting dalam kehidupan sehari-hari? Mengapa?</li>
+        <li>Perilaku baik apa yang sudah saya lakukan untuk menaati norma?</li>
+        <li>Perilaku apa yang masih perlu saya perbaiki?</li>
+        <li>Mulai hari ini, saya berkomitmen untuk...</li>
+      </ol>
+    </div>
+
+    <div class="commitment">
+      <strong>🌱 Ingat:</strong> Norma bukan hanya aturan yang harus kita takutkan ketika dilanggar. Norma membantu kita hidup bersama dengan lebih tertib, aman, dan saling menghargai.
+    </div>
+
+    <label class="check"><input type="checkbox" class="progress-check"> Saya sudah menyelesaikan refleksi diri.</label>
+  </section>
+
+  <section class="card">
+    <div class="section-label">Penutup • 5 Menit</div>
+    <h2>📝 Kesimpulan</h2>
+    <p>Tuliskan kesimpulan tentang norma-norma dalam masyarakat dalam <strong>3–5 kalimat</strong> di buku tulis.</p>
+
+    <div class="quote">
+      “Masyarakat yang baik bukan masyarakat tanpa aturan, tetapi masyarakat yang memahami mengapa aturan itu diperlukan.”
+    </div>
+
+    <label class="check"><input type="checkbox" class="progress-check"> Saya sudah menulis kesimpulan.</label>
+
+    <div class="actions">
+      <button class="primary" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+      <button class="success" onclick="saveProgress()">💾 Simpan Progres</button>
+      <button class="danger" onclick="resetAll()">↺ Mulai Ulang</button>
+    </div>
+    <p class="note">Catatan: tombol Cetak/PDF dapat digunakan guru untuk mencetak LKPD. Jawaban siswa tetap ditulis di buku tulis.</p>
+  </section>
+
+</main>
+
+<footer>
+  LKPD Bimbingan dan Konseling • Norma-Norma dalam Masyarakat<br>
+  <span id="year"></span>
+</footer>
+
+<script>
+let remaining = 45 * 60;
+let timerRunning = false;
+let timerInterval = null;
+
+function formatTime(sec){
+  const m = Math.floor(sec / 60).toString().padStart(2,'0');
+  const s = (sec % 60).toString().padStart(2,'0');
+  return `${m}:${s}`;
+}
+
+function updateTimer(){
+  document.getElementById('timer').textContent = formatTime(remaining);
+  if(remaining <= 0){
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timerBtn').textContent = '▶ Mulai Lagi';
+    alert('⏰ Waktu belajar 45 menit telah selesai. Silakan periksa kembali jawabanmu.');
+  }
+}
+
+function toggleTimer(){
+  if(timerRunning){
+    clearInterval(timerInterval);
+    timerRunning = false;
+    document.getElementById('timerBtn').textContent = '▶ Lanjut';
+  }else{
+    if(remaining <= 0) remaining = 45 * 60;
+    timerRunning = true;
+    document.getElementById('timerBtn').textContent = '⏸ Jeda';
+    timerInterval = setInterval(()=>{
+      remaining--;
+      updateTimer();
+    },1000);
+  }
+}
+
+function resetTimer(){
+  clearInterval(timerInterval);
+  timerRunning = false;
+  remaining = 45 * 60;
+  document.getElementById('timerBtn').textContent = '▶ Mulai';
+  updateTimer();
+}
+
+function updateProgress(){
+  const checks = [...document.querySelectorAll('.progress-check')];
+  const done = checks.filter(c=>c.checked).length;
+  const pct = Math.round(done / checks.length * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent = pct + '% selesai';
+  localStorage.setItem('lkpdNormaChecks', JSON.stringify(checks.map(c=>c.checked)));
+}
+
+function saveProgress(){
+  localStorage.setItem('lkpdNormaNama', document.getElementById('nama').value);
+  localStorage.setItem('lkpdNormaKelas', document.getElementById('kelas').value);
+  localStorage.setItem('lkpdNormaTanggal', document.getElementById('tanggal').value);
+  updateProgress();
+  alert('✅ Progres tersimpan di perangkat ini.');
+}
+
+function resetAll(){
+  if(!confirm('Yakin ingin menghapus progres LKPD di perangkat ini?')) return;
+  localStorage.removeItem('lkpdNormaChecks');
+  localStorage.removeItem('lkpdNormaNama');
+  localStorage.removeItem('lkpdNormaKelas');
+  localStorage.removeItem('lkpdNormaTanggal');
+  document.getElementById('nama').value='';
+  document.getElementById('kelas').value='';
+  document.getElementById('tanggal').value='';
+  document.querySelectorAll('.progress-check').forEach(c=>c.checked=false);
+  updateProgress();
+  resetTimer();
+}
+
+document.querySelectorAll('.progress-check').forEach(c=>{
+  c.addEventListener('change', updateProgress);
+});
+
+window.addEventListener('load', ()=>{
+  document.getElementById('year').textContent = new Date().getFullYear();
+  document.getElementById('nama').value = localStorage.getItem('lkpdNormaNama') || '';
+  document.getElementById('kelas').value = localStorage.getItem('lkpdNormaKelas') || '';
+  document.getElementById('tanggal').value = localStorage.getItem('lkpdNormaTanggal') || '';
+
+  const saved = JSON.parse(localStorage.getItem('lkpdNormaChecks') || '[]');
+  document.querySelectorAll('.progress-check').forEach((c,i)=>{
+    c.checked = saved[i] || false;
+  });
+  updateTimer();
+  updateProgress();
+});
+</script>
+
+</body>
+</html>
